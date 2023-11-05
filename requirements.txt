@@ -1,4 +1,4 @@
-python-3.11.4
+python-3.9
 absl-py==1.2.0
 asgiref==3.5.2
 atomicwrites==1.4.1
