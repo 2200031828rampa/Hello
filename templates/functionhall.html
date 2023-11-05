@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Function Halls Map</title>
+    <style>
+        /* Your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #333;
+            padding: 20px;
+        }
+
+        #cityInput {
+            width: 80%;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        #showMapButton {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #showMapButton:hover {
+            background-color: #0056b3;
+        }
+
+        #map {
+            height: 400px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            margin: 20px;
+        }
+
+        .function-hall-photo {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .function-hall-photo img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Find Function Halls</h1>
+    <input type="text" id="cityInput" placeholder="Enter City Name">
+    <button id="showMapButton">Show Map and Function Halls</button>
+
+    <div id="map"></div>
+    <div id="functionHallPhotos"></div>
+
+    <script type="module">
+        let map;
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: { lat: 16.5075, lng: 80.6460 }, // Default center for Vijayawada
+                zoom: 12, // Default zoom level
+            });
+        }
+
+        function loadFunctionHallPhotos(city) {
+            // Simulated data
+            const functionHallData = [
+                {
+                    name: "Function Hall 1",
+                    image: "function_hall_1.jpg",
+                },
+                {
+                    name: "Function Hall 2",
+                    image: "function_hall_2.jpg",
+                },
+            ];
+
+            const functionHallPhotos = document.getElementById("functionHallPhotos");
+            functionHallPhotos.innerHTML = "";
+
+            functionHallData.forEach((hall) => {
+                const photoDiv = document.createElement("div");
+                photoDiv.classList.add("function-hall-photo");
+                photoDiv.innerHTML = `
+                    <img src="${hall.image}" alt="${hall.name}" />
+                    <p>${hall.name}</p>
+                `;
+                functionHallPhotos.appendChild(photoDiv);
+            });
+        }
+
+        document.getElementById("showMapButton").addEventListener("click", (event) => {
+            event.preventDefault(); // Prevent the default form submission behavior.
+            const city = document.getElementById("cityInput").value;
+            // Perform geocoding or use a data source to determine city coordinates and function hall data.
+            // Then, initialize the map and load function hall photos accordingly.
+            initMap();
+            loadFunctionHallPhotos(city);
+        });
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap&v=weekly" defer></script>
+</body>
+</html>

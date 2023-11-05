@@ -1,0 +1,241 @@
+{% extends 'base.html' %}
+{% block title %}Wedding Event{% endblock title %}
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Booking Form HTML Template</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+        /* Add your custom styles here */
+        .section {
+            position: relative;
+            height: 100vh;
+        }
+
+        .section .section-center {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+        }
+
+        #booking {
+            font-family: 'Montserrat', sans-serif;
+            background-image: url('static/rent2.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        #booking::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            top: 0;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .booking-form {
+            max-width: 642px;
+            width: 100%;
+            margin: auto;
+        }
+
+        .booking-form .form-header {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .booking-form .form-header h1 {
+            font-size: 40px;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: #ffc001;
+            margin: 0px;
+        }
+
+        .booking-form>form {
+            background-color: #101113;
+            padding: 30px 20px;
+            border-radius: 3px;
+        }
+
+        .booking-form .form-group {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .booking-form .form-control {
+            background-color: #f5f5f5;
+            border: none;
+            height: 45px;
+            border-radius: 3px;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            font-weight: 400;
+            color: #101113;
+        }
+
+        .booking-form .form-control::-webkit-input-placeholder {
+            color: rgba(16, 17, 19, 0.3);
+        }
+
+        .booking-form .form-control:-ms-input-placeholder {
+            color: rgba(16, 17, 19, 0.3);
+        }
+
+        .booking-form .form-control::placeholder {
+            color: rgba(16, 17, 19, 0.3);
+        }
+
+        .booking-form input[type="date"].form-control:invalid {
+            color: rgba(16, 17, 19, 0.3);
+        }
+
+        .booking-form select.form-control {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        .booking-form select.form-control+.select-arrow {
+            position: absolute;
+            right: 0px;
+            bottom: 6px;
+            width: 32px;
+            line-height: 32px;
+            height: 32px;
+            text-align: center;
+            pointer-events: none;
+            color: #101113;
+            font-size: 14px;
+        }
+
+        .booking-form select.form-control+.select-arrow:after {
+            content: '\279C';
+            display: block;
+            -webkit-transform: rotate(90deg);
+            transform: rotate(90deg);
+        }
+
+        .booking-form .form-label {
+            color: #fff;
+            font-size: 12px;
+            font-weight: 400;
+            margin-bottom: 5px;
+            display: block;
+            text-transform: uppercase;
+        }
+
+        .booking-form .submit-btn {
+            color: #101113;
+            background-color: #ffc001;
+            font-weight: 700;
+            height: 50px;
+            border: none;
+            width: 100%;
+            display: block;
+            border-radius: 3px;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="booking" class="section">
+        <div class="section-center">
+            <div class="container">
+                <div class="row">
+                    <div class="booking-form">
+                        <div class="form-header">
+                            <h1>Book Wedding Event</h1>
+                        </div>
+                        <form method="post" action="/weddingevent">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="name">Name</label>
+                                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter your Name" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="email">Email</label>
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter Your Email" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="phone">Phone</label>
+                                <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter Your Phone Number" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="guest">Estimated Guest Count</label>
+                                <input type="text" class="form-control" id="guest" name="guest" placeholder="Enter Your Estimated Guest Count" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="destination">Event Location</label>
+                                <input type="text" class="form-control" id="destination" name="destination" placeholder="Enter ZIP/Location" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="cuisine">Cuisine</label>
+                                <select class="form-control" id="cuisine" name="cuisine" required>
+                                    <option value="IND">Indian</option>
+                                    <option value="CHN">Chinese</option>
+                                    <option value="ARB">Arabian</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="package">PACKAGE</label>
+                                <select class="form-control" id="package" name="package" required>
+                                    <option value="BP">Basic Package :  ₹500 per 100 members.</option>
+                                    <option value="SP">Standard Package : ₹5,000 per 100 members.</option>
+                                    <option value="AP">Advanced Package : ₹10,000 per 100 members.</option>
+                                    <option value="PP">Premium Package : ₹1,000 to ₹50,000 per 100 members.</option>
+                                    <option value="EP">Enterprise Package : ₹5,000 to ₹200,000 or more per 100 members.</option>
+                                    <option value="LP">Lite Package : Typically free or up to ₹200 per 100 members.</option>
+                                    <option value="PPP">Pro Package : Priced at approximately ₹50 to ₹3,000 per 100 members.</option>
+                                    <option value="UP">Ultimate Package : Around ₹300 to ₹1,000 per 100 members.</option>
+                                    <option value="VP">VIP Package : ₹1,000 to ₹50,000 or more per 100 members.</option>
+                                </select>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="date">Date</label>
+                                        <input type="date" class="form-control" id="date" name="date" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for "time">Time</label>
+                                        <input type="time" class="form-control" id="time" name="time">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="desc">Additional Information</label>
+                                <textarea class="form-control" id="desc" name="desc" placeholder="Enter additional information"></textarea>
+                            </div>
+                            <div class="form-btn">
+                                <button class="submit-btn" type="submit">Book Now</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock body %}
